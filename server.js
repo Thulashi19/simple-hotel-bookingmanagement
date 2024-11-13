@@ -7,12 +7,12 @@ const app = express();
 app.use(cors());
 app.use(bodyParser.json());
 
-// MongoDB connection
+
 mongoose.connect('mongodb://127.0.0.1:27017/hotelBooking')
     .then(() => console.log("MongoDB connected"))
     .catch(err => console.log("MongoDB connection error:", err));
 
-// Booking schema and model
+
 const bookingSchema = new mongoose.Schema({
     guestName: String,
     roomType: String,
@@ -22,7 +22,7 @@ const bookingSchema = new mongoose.Schema({
 
 const Booking = mongoose.model('Booking', bookingSchema);
 
-// API endpoints
+
 app.post('/api/bookings', async (req, res) => {
     const newBooking = new Booking(req.body);
     await newBooking.save();
